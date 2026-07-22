@@ -1,0 +1,39 @@
+.header-bg{
+  background-color: black;
+}
+.header-bg .logo{
+  width: 45px;
+}
+.header-bg .nav-link{
+  color: white;
+}
+.header-bg .dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 0px;
+}
+
+.header-bg .navbar-nav  .nav-link.active,
+ .navbar-nav .nav-link.show{
+color: rgb(200, 131, 27);
+ }
+ .cart-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+   width: 18px;
+  height: 18px;
+  background-color: rgb(235, 228, 228);
+  color: black;
+  border-radius: 50%;
+  display: flex;
+  position:absolute;
+  right: 0px;
+  top: 0px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+
+}
