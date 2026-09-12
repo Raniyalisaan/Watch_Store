@@ -1,56 +1,37 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import './Watches.css';
+import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import WatchCard from "../components/WatchCard";
 
-function Watches() {
-  const {id} = useParams();
+const Watches = ({ watches = [] }) => {
+  const { products = [] } = useSelector(
+    (state) => state.productState
+  );
 
-  const { products } =useSelector((state)=> state.productState);
-  const watch = products.find((p)=> p._id == id);
-
-  if (!watch) return <h2>Watch not found</h2>;
+  // Combine previous watches and newly added products
+  const allWatches = [...watches, ...products];
 
   return (
-    <Container>
+    <Container className="mt-4">
+      <h2 className="text-center mb-4">
+        ALL WATCHES
+      </h2>
+
       <Row>
-        <Col md={4} className="mt-4">
-          <Image
-            className="w-100"
-            src={watch?.productPhoto ?? null}
-            alt={watch?.productName}
-          />
-        </Col>
-
-        <Col md={8} className="mt-4">
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>{watch?.productName ?? ''}</h2>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              {watch?.productDescription ?? ''}
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              ₹{watch?.productPrice ?? 0}
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <Button onClick={handleAddToCart}>
-                Add To Cart
-              </Button>
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
+        {allWatches.length > 0 ? (
+          allWatches.map((watch, index) => (
+            <WatchCard
+              key={`${watch.id}-${index}`}
+              watch={watch}
+            />
+          ))
+        ) : (
+          <h4 className="text-center">
+            No watches found
+          </h4>
+        )}
       </Row>
     </Container>
-
-
-
-
-
   );
-}
+};
 
 export default Watches;

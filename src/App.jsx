@@ -115,11 +115,11 @@ function App() {
         <Header />
         <ToastContainer position='top-right' autoClose={2000} />
         <Routes>
-          <Route path='/' element={<Home brands={brands} />} />
+          <Route path='/' element={<Home brands={brands} watches={watches} />} />
           <Route path='/watches/' element={<Watches watches={watches} />} />
           <Route path='/watches/:id' element={<WatchesPage />} />
           <Route path='/smart' element={<Smart />} />
-          <Route path='/brand' element={<Brand />} />
+          <Route path='/brand' element={<Brand watches={watches} />} />
           <Route path='/stores' element={<Stores />} />
           <Route path='/offer' element={<Offers />} />
           <Route path='/login' element={<Login />} />
@@ -127,7 +127,7 @@ function App() {
           <Route path='/forbidden' element={<Forbidden />} />
           <Route path="/cartitemslist" element={<CartItemsList />} />
           <Route path="/watchcard" element={<WatchCard />} />
-         
+          
 
 
 
@@ -135,12 +135,12 @@ function App() {
             <AddProduct />
           </ProtectedRoute>} />
           <Route path='/admin/list-product' element={<ProtectedRoute>
-            <ListProduct />
+            <ListProduct watches={watches} />
           </ProtectedRoute>} />
           <Route path='/admin/edit-product/:id' element={<ProtectedRoute>
             <EditProduct />
           </ProtectedRoute>} />
-          <Route path='/admin/list-users' element={<ProtectedRoute requiredRole={['admin']}>
+          <Route path='/admin/list-users' element={<ProtectedRoute requiredRole={['user']}>
             <ListUsers />
           </ProtectedRoute>} />
 

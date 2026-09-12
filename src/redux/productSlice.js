@@ -4,7 +4,7 @@ const productSlice = createSlice({
  initialState:{
   products: JSON.parse(localStorage.getItem('products')) || [],
   loading: false,
-  cartItems:JSON.parse(localStorage.getItem('cartItems')) || [],
+  cartItems:JSON.parse(localStorage.getItem('watch_cartItems')) || [],
 
 
 },
@@ -21,7 +21,7 @@ reducers: {
       }else{
         state.cartItems.push({...action.payload, quantity:1})
       }
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      localStorage.setItem('watch_cartItems', JSON.stringify(state.cartItems))
     },
 
     editProduct: (state, action) => {
@@ -56,7 +56,7 @@ reducers: {
       );
 
         localStorage.setItem(
-          'cartItems',
+          'watch_cartItems',
           JSON.stringify(state.cartItems)
         );
       },
@@ -65,7 +65,7 @@ reducers: {
        const cartItemIndex =state.cartItems.findIndex((item)=> item.id === action.payload);
     if(cartItemIndex !== -1){
         state.cartItems[cartItemIndex].quantity++ ;
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      localStorage.setItem('watch_cartItems', JSON.stringify(state.cartItems))
 
     }
   },
@@ -73,7 +73,7 @@ reducers: {
        const cartItemIndex =state.cartItems.findIndex((item)=> item.id === action.payload);
     if(cartItemIndex !== -1){
         state.cartItems[cartItemIndex].quantity-- ;
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      localStorage.setItem('watch_cartItems', JSON.stringify(state.cartItems))
 
     }
   }
