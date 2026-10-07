@@ -117,9 +117,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home brands={brands} watches={watches} />} />
           <Route path='/watches/' element={<Watches watches={watches} />} />
-          <Route path='/watches/:id' element={<WatchesPage />} />
+          <Route path='/watches/:id' element={<WatchesPage watches={watches}/>} />
           <Route path='/smart' element={<Smart />} />
-          <Route path='/brand' element={<Brand watches={watches} />} />
+          <Route path='/brand' element={<Brand brands={brands} />} />
           <Route path='/stores' element={<Stores />} />
           <Route path='/offer' element={<Offers />} />
           <Route path='/login' element={<Login />} />

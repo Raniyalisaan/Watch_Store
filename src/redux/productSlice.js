@@ -14,15 +14,27 @@ reducers: {
       localStorage.setItem('products', JSON.stringify(state.products));
     },
 
-    addToCart:(state,action)=>{
-      const cartItemIndex =state.cartItems.findIndex((item)=> item.id === action.payload.id);
-    if(cartItemIndex !== -1){
-        state.cartItems[cartItemIndex].quantity++ ;
-      }else{
-        state.cartItems.push({...action.payload, quantity:1})
-      }
-      localStorage.setItem('watch_cartItems', JSON.stringify(state.cartItems))
-    },
+addToCart: (state, action) => {
+  const cartProduct = action.payload;
+
+  const existingItem = state.cartItems.find(
+    (item) => item.id === cartProduct.id
+  );
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    state.cartItems.push({
+      ...cartProduct,
+      quantity: 1,
+    });
+  }
+
+  localStorage.setItem(
+    "watch_cartItems",
+    JSON.stringify(state.cartItems)
+  );
+},
 
     editProduct: (state, action) => {
       const index = state.products.findIndex(

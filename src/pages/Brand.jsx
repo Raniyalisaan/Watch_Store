@@ -1,6 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const Brand = ({ watches = [] }) => {
+const Brand = ({ brands = [] }) => {
   return (
     <Container className="mt-5">
       <h1 className="text-center mb-3">
@@ -12,42 +13,31 @@ const Brand = ({ watches = [] }) => {
       </p>
 
       <Row>
-        {watches.length > 0 ? (
-          watches.map((watch) => (
-            <Col
-              md={6}
-              lg={4}
-              xl={3}
-              className="mb-4"
-              key={watch.id}
-            >
-              <Card className="h-100 text-center shadow-sm">
-                <Card.Img
-                  variant="top"
-                  src={watch.productPhoto}
-                  alt={watch.productName}
-                  style={{
-                    height: "220px",
-                    objectFit: "contain",
-                    padding: "15px",
-                  }}
-                />
-
-                <Card.Body>
-                  <Card.Title>
-                    {watch.productName}
-                  </Card.Title>
-
-                  <Card.Text>
-                    {watch.productDescription}
-                  </Card.Text>
-
-                  <h5>
-                    ₹{watch.productPrice}
-                  </h5>
-                </Card.Body>
-              </Card>
-            </Col>
+        {brands.length > 0 ? (
+          brands.map((brand, index) => (
+           <Col
+  md={6}
+  lg={4}
+  xl={3}
+  className="mt-4"
+  key={brand.id ?? index}
+>
+  <Card className="text-center shadow-sm overflow-hidden">
+    <Link to={`/brand/${brand.id}`}>
+      <Card.Img
+        variant="top"
+        src={brand.brandPhoto}
+        alt={brand.brandName || "Brand"}
+        style={{
+          width: "100%",
+          height: "300px",
+          objectFit: "cover",
+          display: "block",
+        }}
+      />
+    </Link>
+  </Card>
+</Col>
           ))
         ) : (
           <h4 className="text-center">

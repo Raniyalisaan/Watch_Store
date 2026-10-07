@@ -37,9 +37,12 @@ const CartItemsList = () => {
   }
 
   const findCartItemsTotal = cartItems.reduce((total, item) => {
-    total += item.quantity * item.productPrice;
-    return total;
-  }, 0)
+  const price = Number(item.productPrice ?? item.price ?? 0);
+  const quantity = Number(item.quantity ?? 1);
+
+  return total + quantity * price;
+}, 0);
+
   return (
     <>
       <div className="container">
@@ -59,16 +62,20 @@ const CartItemsList = () => {
 
             <tbody>
               {cartItems.map((cartItem, index) => (
-                <tr key={index}>
+                <tr key={cartItem.id}>
                   <td>{index + 1}</td>
 
-                  <td>
-                    <img src={cartItem?.productPhoto ?? null} width="50" />
-                  </td>
+                <td>
+  <img
+    src={cartItem.productPhoto ?? cartItem.image}
+    width="50"
+    alt={cartItem.productName ?? cartItem.name}
+  />
+</td>
 
-                  <td>{cartItem?.productName ?? ''}</td>
+<td>{cartItem.productName ?? cartItem.name}</td>
 
-                  <td>{cartItem?.productPrice ?? 0}</td>
+<td>₹{cartItem.productPrice ?? cartItem.price}</td>
 
                   <td className="text-center v-middle">
                     <InputGroup className="mb-3">
